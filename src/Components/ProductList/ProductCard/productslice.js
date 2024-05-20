@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   products: [],
+  totalPages:null,
   selectedProduct: null,
   productUpdate: null,
   status: "idle",
@@ -24,9 +25,9 @@ export const createProductAsync = createAsyncThunk(
 
 export const fetchAllProductsAsync = createAsyncThunk(
   "product/fetchAllProducts",
-  async () => {
-    const response = await fetchAllProducts();
-    return response.data.products;
+  async (page = 1) => {
+    const response = await fetchAllProducts(page);
+    return response.data;
   }
 );
 export const deleteProductByIdAsync = createAsyncThunk(
@@ -78,7 +79,8 @@ export const productSlice = createSlice({
       })
       .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.products = action.payload;
+        state.products = action.payload.products;
+        state.totalPages=action.payload.totalPages;
         state.productUpdate = null;
       })
       .addCase(deleteProductByIdAsync.pending, (state) => {
@@ -119,6 +121,7 @@ export const productSlice = createSlice({
 export const { clearSelectedProduct,productReset } = productSlice.actions;
 
 export const selectAllProducts = (state) => state.product.products;
+export const totalProductPages = (state) => state.product.totalPages;
 export const status = (state) => state.product.status;
 export const updatedProductDetails = (state) => state.product.productUpdate;
 export default productSlice.reducer;

@@ -2,12 +2,14 @@ import './ProductCard.css';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {Link,useNavigate} from "react-router-dom";
-import { deleteProductByIdAsync,getProductByIdAsync } from './productslice';
-import { useDispatch } from "react-redux";
+import { deleteProductByIdAsync,fetchAllProductsAsync,getProductByIdAsync } from './productslice';
+import { useDispatch,useSelector } from "react-redux";
+import { selectAllProducts } from './productslice';
 
 const defaultImg = `${process.env.PUBLIC_URL}/defaultProductImg.jpg`
 
- const ProductCard = ({ product,id }) => {
+ const ProductCard = ({ product,id,currentPage }) => {
+  const products=useSelector(selectAllProducts);
   const navigate=useNavigate();
   const dispatch = useDispatch();
   const deleteCard=()=>{

@@ -56,7 +56,11 @@
 .pro-btns .btn{
     margin:0.2rem 0.5rem;
 }
-
+.paginationContainer{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 @media screen and (max-width:740px){

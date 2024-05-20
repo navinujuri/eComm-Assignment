@@ -1,8 +1,8 @@
 
-export function fetchAllProducts(amount = 1) {
+export function fetchAllProducts(page) {
     return new Promise(async (resolve) =>{
       //ToDo:We will not hard code the URL
-      const response=await fetch('http://localhost:5000/api/products?page=1&size=10');
+      const response=await fetch(`http://localhost:5000/api/products?page=${page}&size=3`);
       const data=await response.json();
       resolve({data});     
     }

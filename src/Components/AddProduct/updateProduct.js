@@ -69,7 +69,8 @@ const UpdateProduct = () => {
       alert('Failed to add product.');
     }
    
-    navigate('/');
+    //navigate('/');
+    navigate(-1, { replace: true });
   };
 
   return (
